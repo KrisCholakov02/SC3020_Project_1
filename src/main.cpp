@@ -9,9 +9,9 @@
 #include "record.h"
 #include "block.h"
 #include "disk.h"
-#include "BPTree.h"
-#include "Node.h"
-#include "LL.h"
+#include "b_plus_tree.h"
+#include "tree_node.h"
+#include "linked_list.h"
 
 using namespace std;
 

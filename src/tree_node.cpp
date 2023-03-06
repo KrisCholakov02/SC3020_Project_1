@@ -1,6 +1,6 @@
-#include "Node.h"
+#include "tree_node.h"
 #include "block.h"
-#include "LL.h"
+#include "linked_list.h"
 
 Node::Node(int max)
 {

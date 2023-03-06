@@ -1,7 +1,7 @@
 #ifndef CZ4031_DB_PROJECT_MASTER_BPTREE_H
 #define CZ4031_DB_PROJECT_MASTER_BPTREE_H
 
-#include "Node.h"
+#include "tree_node.h"
 #include "block.h"
 
 class BPTree
