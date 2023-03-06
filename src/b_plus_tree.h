@@ -1,5 +1,5 @@
-#ifndef CZ4031_DB_PROJECT_MASTER_BPTREE_H
-#define CZ4031_DB_PROJECT_MASTER_BPTREE_H
+#ifndef B_PLUS_TREE_H
+#define B_PLUS_TREE_H
 
 #include "tree_node.h"
 #include "block.h"
@@ -7,13 +7,13 @@
 class BPlusTree
 {
     Node *root;
+    int numNodes;
+    int numDeletes;
+    int maxSize;
+
+    Node* findParent(Node*,Node*);
     void insertInternal(Node*,Node*,int);
     void removeInternal(Node*,Node*,int);
-    Node* findParent(Node*,Node*);
-    int numNodes;
-    int numDeleteions;
-    int MAX;
-
 public:
     BPlusTree(int MAX);
     void search(int);
@@ -21,12 +21,11 @@ public:
     void insert(int, Block* block);
     void remove(int);
     Node* getRoot();
-    int getNumOfNodes();
-    int getNumDeletion();
-    void printNode(Node*);
+    int getNumNodes();
+    int getNumDeletes();
     Node* getFirstChild(Node*);
     int getHeight(Node*);
+    void printNode(Node*);
 };
 
-
-#endif //CZ4031_DB_PROJECT_MASTER_BPTREE_H
+#endif

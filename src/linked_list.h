@@ -4,15 +4,15 @@
 
 #include "block.h"
 
-class LL
+class LinkedList
 {
     int key;
     Block* pointToBlock;
-    LL* nextLL;
+    LinkedList* nextLL;
     friend class Node;
     friend class BPlusTree;
 public:
-    LL() {
+    LinkedList() {
         pointToBlock = NULL;
         nextLL = NULL;
     };

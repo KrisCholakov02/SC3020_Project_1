@@ -7,15 +7,16 @@
 
 class Node
 {
-    bool isLeaf;
-    int *key, size;
+    bool isLeafNode;
+    int *key;
+    int size;
     Node** children;
-    Block** ptr;
-    LL** LLholder;
+    Block** pointer;
+    LinkedList** linkedList;
     Node* leftSib;
     Node* rightSib;
     friend class BPlusTree;
-    int MAX;
+    int maxSize;
     void delKeyInternal(Node* child, int x);
 
 public:

@@ -1,3 +1,3 @@
-/Users/Kris/Programming/CLionProjects/C/SC3020_Project_1/cmake-build-debug/CMakeFiles/CZ4031_DB_Project.dir
-/Users/Kris/Programming/CLionProjects/C/SC3020_Project_1/cmake-build-debug/CMakeFiles/edit_cache.dir
-/Users/Kris/Programming/CLionProjects/C/SC3020_Project_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/kristiyancholakov/Programming/CLionProjects/SC3020_Project_1/cmake-build-debug/CMakeFiles/CZ4031_DB_Project.dir
+/Users/kristiyancholakov/Programming/CLionProjects/SC3020_Project_1/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/kristiyancholakov/Programming/CLionProjects/SC3020_Project_1/cmake-build-debug/CMakeFiles/rebuild_cache.dir

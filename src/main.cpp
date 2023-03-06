@@ -156,7 +156,7 @@ int main(int argc, char** argv) {
     cout << "Size of 1 Record: " << sizeof(Record) << endl;
 
     int totalSize = Disk.getSizeOfStorage(); //to add on B+ tree size
-    totalSize += bpt.getNumOfNodes() * sizeof(Node);
+    totalSize += bpt.getNumNodes() * sizeof(Node);
 
     cout << "Size of Database: " << totalSize << " Bytes" << endl;
     cout << " " << endl;
@@ -166,7 +166,7 @@ int main(int argc, char** argv) {
 
     cout << "---Experiment 2: Building B+ tree using insertion---" << endl;
     cout << "Parameter n of B+ tree: " << MAX << endl;
-    cout << "Number of Nodes in BP Tree: " << bpt.getNumOfNodes() << endl;
+    cout << "Number of Nodes in BP Tree: " << bpt.getNumNodes() << endl;
     cout << "Height of BP tree: " << bpt.getHeight(bpt.getRoot()) << endl;
     cout << "Content of Root Node: " << endl;
     bpt.printNode(bpt.getRoot());
@@ -194,13 +194,13 @@ int main(int argc, char** argv) {
 
     cout << "---Experiment 5: Delete movies given numVotes---" << endl;
     // Remove numVote = 1000
-    int nodeBeforeRemove = bpt.getNumOfNodes();
+    int nodeBeforeRemove = bpt.getNumNodes();
     int heightBeforeRemove = bpt.getHeight(bpt.getRoot());
     bpt.remove(1000);
 
     cout << "Number of Nodes in BP Tree before removal: " << nodeBeforeRemove << endl;
-    cout << "Number of Nodes in BP Tree after removal: " << bpt.getNumOfNodes() << endl;
-    cout << "Number of Nodes removed: " << bpt.getNumDeletion() << endl;
+    cout << "Number of Nodes in BP Tree after removal: " << bpt.getNumNodes() << endl;
+    cout << "Number of Nodes removed: " << bpt.getNumDeletes() << endl;
     cout << "Height of BP tree before removal: " << heightBeforeRemove << endl;
     cout << "Height of BP tree after removal: " << bpt.getHeight(bpt.getRoot()) << endl;
     cout << "Content of root node after removal: " << endl;
