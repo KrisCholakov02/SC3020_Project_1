@@ -1,9 +1,7 @@
 #include <fstream>
 #include <iostream>
-#include <string>
 #include <vector>
 #include <memory>
-#include <set>
 #include <tgmath.h>
 
 #include "record.h"
@@ -11,16 +9,13 @@
 #include "disk.h"
 #include "b_plus_tree.h"
 #include "tree_node.h"
-#include "linked_list.h"
 
 using namespace std;
 
-int MAX;//size of each node
+int MAX;/
 class BPlusTree;
 
 int main(int argc, char** argv) {
-
-    // get blockSize from user
     int BlockSize;
     cout << "Enter Block Size (in bytes)" << endl;
     cin >> BlockSize;
@@ -34,15 +29,10 @@ int main(int argc, char** argv) {
     int i = 0, j = 0;
     int blocksUsed = 1;
     int numIO = 1;
-    int numRecords = -1; //to skip first line
+    int numRecords = -1;
 
-    // -------------------------------------
-    // do modify accordingly
     string DATAFILE = "../data/data.tsv";
-    // string DATAFILE = "../data/dummy.tsv";
-    // -------------------------------------
 
-    // read file once to get numRecords
     ifstream fin1(DATAFILE);
     while (getline(fin1, line)) {
         numRecords++;
@@ -63,17 +53,12 @@ int main(int argc, char** argv) {
     int numNodes = ceil(numRecords/n);
     cout << "num B+ leaf nodes = " << numNodes << endl;
 
-    //for debug
     int heightOfTree = ceil(log2(numNodes));
     cout << "height/degree of B+ Tree = " << heightOfTree << endl;
 
-    // initialise new Disk struc for storing blocks/records etc
     Disk Disk;
-    // initialise new Block, with block size
     Block newBlock(BlockSize);
-    // init first shared_ptr for BlockVector
     std::shared_ptr<Block> newBlockPtr = std::make_shared<Block>(std::move(newBlock));
-    // add newBlock to array of Block pointers
     Disk.addBlock(newBlockPtr);
     cout << "Building Disk Struc..." << endl;
 
@@ -83,25 +68,19 @@ int main(int argc, char** argv) {
     cout << "Reading File......" << endl;
 
     while (getline(fin, line)) {
-        // Skips the first line of headers which are titles
         if (skipline){
             skipline = false;
             continue;
         }
 
-        // Split line into tab-separated parts
         std::istringstream iss(line);
         std::string afield;
 
-        // Reads each line of tsv as a string
-        // And splits each strings to smaller strings
-        // Appends to the fields[] array
         while(std::getline(iss, afield, '\t')){
             fields.push_back(afield);
         }
 
         Record newRecord;
-        // Add fields into Record
         newRecord.tconst = fields[i++];
         std::istringstream(fields[i++]) >> newRecord.averageRating;
         std::istringstream(fields[i++]) >> newRecord.numVotes;
@@ -113,19 +92,15 @@ int main(int argc, char** argv) {
 
             cout << "New record inserted into block with ID " << newRecord.retrieveTCONST() << endl;
 
-            // insert record into the b+ tree with numVotes as key
-            // bpt.insert(newRecord.retrieveNumVotes(), &blkToBeInserted);
             Block* blockToInsert = blockPointer.get();
             bpt.insert(newRecord.retrieveNumVotes(), blockToInsert);
             numIO++;
         }
 
         else{
-            // after maxing out one block, need retrieve another block
             cout << "Block Full, initialising new Block..." << endl;
             numIO++;
 
-            //initialise new block and add to pointerVector
             Block additionalBlock(BlockSize);
 
             additionalBlock.insertRecord(newRecord);
@@ -139,15 +114,13 @@ int main(int argc, char** argv) {
 
             blocksUsed++;
         }
-    } //exit while loop
+    }
 
-    // close the .tsv file as all data has been read already
     fin.close();
 
     cout << "--- All Data Stored in Disk ---" << endl;
     cout << " " << endl;
 
-    // start of Experiments
     cout << "---Experiment 1: Storing Data on Disk---" << endl;
     cout << "Storage Stats:" << endl;
     cout << "Number of Blocks Used: " << blocksUsed << endl;
@@ -193,7 +166,6 @@ int main(int argc, char** argv) {
     cout<<"\n";
 
     cout << "---Experiment 5: Delete movies given numVotes---" << endl;
-    // Remove numVote = 1000
     int nodeBeforeRemove = bpt.getNumNodes();
     int heightBeforeRemove = bpt.getHeight(bpt.getRoot());
     bpt.remove(1000);
