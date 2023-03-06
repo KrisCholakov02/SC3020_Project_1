@@ -1,21 +1,24 @@
-#include "tree_node.h"
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <memory>
+#include <set>
+#include <tgmath.h>
+
 #include "record.h"
 #include "block.h"
 #include "disk.h"
-#include "b_plus_tree.h"
-
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <memory>
-#include <tgmath.h>
+#include "BPTree.h"
+#include "Node.h"
+#include "LL.h"
 
 using namespace std;
 
-int MAX; //size of each node
+int MAX;//size of each node
 class BPTree;
 
-int main(int argc, char **argv) {
+int main(int argc, char** argv) {
 
     // get blockSize from user
     int BlockSize;
@@ -50,13 +53,14 @@ int main(int argc, char **argv) {
     int n;
     if (BlockSize == 200) {
         n = 6;
-    } else {
+    }
+    else {
         n = 15;
     }
     cout << "n = " << n << endl;
     MAX = n;
 
-    int numNodes = ceil(numRecords / n);
+    int numNodes = ceil(numRecords/n);
     cout << "num B+ leaf nodes = " << numNodes << endl;
 
     //for debug
@@ -80,7 +84,7 @@ int main(int argc, char **argv) {
 
     while (getline(fin, line)) {
         // Skips the first line of headers which are titles
-        if (skipline) {
+        if (skipline){
             skipline = false;
             continue;
         }
@@ -92,7 +96,7 @@ int main(int argc, char **argv) {
         // Reads each line of tsv as a string
         // And splits each strings to smaller strings
         // Appends to the fields[] array
-        while (std::getline(iss, afield, '\t')) {
+        while(std::getline(iss, afield, '\t')){
             fields.push_back(afield);
         }
 
@@ -103,18 +107,20 @@ int main(int argc, char **argv) {
         std::istringstream(fields[i++]) >> newRecord.numVotes;
         std::shared_ptr<Block> blockPointer;
 
-        if (Disk.blockVector[blocksUsed - 1]->numRecordsInBlock() < Disk.blockVector[blocksUsed - 1]->maximumRecords) {
-            Disk.blockVector[blocksUsed - 1]->insertRecord(newRecord);
-            blockPointer = Disk.blockVector[blocksUsed - 1];
+        if (Disk.blockVector[blocksUsed-1]->numRecordsInBlock() < Disk.blockVector[blocksUsed-1]->maximumRecords){
+            Disk.blockVector[blocksUsed-1]->insertRecord(newRecord);
+            blockPointer = Disk.blockVector[blocksUsed-1];
 
             cout << "New record inserted into block with ID " << newRecord.retrieveTCONST() << endl;
 
             // insert record into the b+ tree with numVotes as key
             // bpt.insert(newRecord.retrieveNumVotes(), &blkToBeInserted);
-            Block *blockToInsert = blockPointer.get();
+            Block* blockToInsert = blockPointer.get();
             bpt.insert(newRecord.retrieveNumVotes(), blockToInsert);
             numIO++;
-        } else {
+        }
+
+        else{
             // after maxing out one block, need retrieve another block
             cout << "Block Full, initialising new Block..." << endl;
             numIO++;
@@ -122,14 +128,12 @@ int main(int argc, char **argv) {
             //initialise new block and add to pointerVector
             Block additionalBlock(BlockSize);
 
-            additionalBlock.
-
-                    insertRecord(newRecord);
+            additionalBlock.insertRecord(newRecord);
             cout << "New record inserted into block with ID " << newRecord.retrieveTCONST() << endl;
             blockPointer = std::make_shared<Block>(additionalBlock);
             Disk.addBlock(blockPointer);
 
-            Block *blockToInsert = blockPointer.get();
+            Block* blockToInsert = blockPointer.get();
             bpt.insert(newRecord.retrieveNumVotes(), blockToInsert);
             numIO++;
 
@@ -152,41 +156,41 @@ int main(int argc, char **argv) {
     cout << "Size of 1 Record: " << sizeof(Record) << endl;
 
     int totalSize = Disk.getSizeOfStorage(); //to add on B+ tree size
-    totalSize += bpt.getNumOfNodes() * sizeof(TreeNode);
+    totalSize += bpt.getNumOfNodes() * sizeof(Node);
 
     cout << "Size of Database: " << totalSize << " Bytes" << endl;
     cout << " " << endl;
-    cout << "\n";
-    cout << "\n";
-    cout << "\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 
     cout << "---Experiment 2: Building B+ tree using insertion---" << endl;
     cout << "Parameter n of B+ tree: " << MAX << endl;
     cout << "Number of Nodes in BP Tree: " << bpt.getNumOfNodes() << endl;
     cout << "Height of BP tree: " << bpt.getHeight(bpt.getRoot()) << endl;
-    cout << "Content of Root TreeNode: " << endl;
+    cout << "Content of Root Node: " << endl;
     bpt.printNode(bpt.getRoot());
     cout << " " << endl;
 
     cout << "Content of first child: " << endl;
     bpt.printNode(bpt.getFirstChild(bpt.getRoot()));
     cout << " " << endl;
-    cout << "\n";
-    cout << "\n";
-    cout << "\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 
     cout << "---Experiment 3: Retrieve movies with numVotes = 500---" << endl;
     bpt.search(500);
-    cout << "\n";
-    cout << "\n";
-    cout << "\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 
 
     cout << "---Experiment 4: INSERT HERE---" << endl;
     bpt.searchRange(30000, 40000);
-    cout << "\n";
-    cout << "\n";
-    cout << "\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 
     cout << "---Experiment 5: Delete movies given numVotes---" << endl;
     // Remove numVote = 1000
@@ -202,13 +206,13 @@ int main(int argc, char **argv) {
     cout << "Content of root node after removal: " << endl;
     bpt.printNode(bpt.getRoot());
     cout << " " << endl;
-    cout << "\n";
+    cout<<"\n";
     cout << "Content of first child: " << endl;
     bpt.printNode(bpt.getFirstChild(bpt.getRoot()));
     cout << " " << endl;
-    cout << "\n";
-    cout << "\n";
-    cout << "\n";
+    cout<<"\n";
+    cout<<"\n";
+    cout<<"\n";
 
 
     return 0;

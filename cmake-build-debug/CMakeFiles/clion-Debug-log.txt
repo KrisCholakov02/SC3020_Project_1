@@ -1,4 +1,4 @@
-"/Users/Kris/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=/Users/Kris/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/CLion.app/Contents/bin/ninja/mac/ninja" -G Ninja -S /Users/Kris/Programming/CLionProjects/B+Tree -B /Users/Kris/Programming/CLionProjects/B+Tree/cmake-build-debug
+"/Users/Kris/Library/Application Support/JetBrains/Toolbox/apps/CLion/ch-0/223.8617.54/CLion.app/Contents/bin/cmake/mac/bin/cmake" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" -S /Users/Kris/Programming/CLionProjects/C/SC3020_Project_1 -B /Users/Kris/Programming/CLionProjects/C/SC3020_Project_1/cmake-build-debug
 -- Configuring done
 -- Generating done
--- Build files have been written to: /Users/Kris/Programming/CLionProjects/B+Tree/cmake-build-debug
+-- Build files have been written to: /Users/Kris/Programming/CLionProjects/C/SC3020_Project_1/cmake-build-debug

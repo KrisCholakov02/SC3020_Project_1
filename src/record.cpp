@@ -1,22 +1,21 @@
-#include <string>
+# include <string>
+# include <iostream>
 
-#include "record.h"
+# include "record.h"
 
-void Record::insertRecord(std::string tconst, std::string averageRating, std::string numVotes) {
+void Record::insertRecord(std::string tconst, std::string averageRating, std::string numVotes){
     // the record takes data from tsv as String type, but stores internally as float/int type
     tconst = tconst;
     averageRating = stof(averageRating);
     numVotes = stoi(numVotes);
 }
 
-std::string Record::retrieveTCONST() {
+std::string Record::retrieveTCONST(){
     return tconst;
 };
-
-float Record::retrieveAverageRating() {
+float Record::retrieveAverageRating(){
     return averageRating;
 };
-
-int Record::retrieveNumVotes() {
+int Record::retrieveNumVotes(){
     return numVotes;
 };
