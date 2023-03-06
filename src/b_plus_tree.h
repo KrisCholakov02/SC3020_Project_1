@@ -4,18 +4,18 @@
 #include "tree_node.h"
 #include "block.h"
 
-class BPTree
+class BPlusTree
 {
     Node *root;
     void insertInternal(Node*,Node*,int);
     void removeInternal(Node*,Node*,int);
     Node* findParent(Node*,Node*);
-    int numOfNodes;
-    int numOfDeletion;
+    int numNodes;
+    int numDeleteions;
     int MAX;
 
 public:
-    BPTree(int MAX);
+    BPlusTree(int MAX);
     void search(int);
     void searchRange(int, int);
     void insert(int, Block* block);

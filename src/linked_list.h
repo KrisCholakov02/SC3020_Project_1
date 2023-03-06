@@ -10,7 +10,7 @@ class LL
     Block* pointToBlock;
     LL* nextLL;
     friend class Node;
-    friend class BPTree;
+    friend class BPlusTree;
 public:
     LL() {
         pointToBlock = NULL;

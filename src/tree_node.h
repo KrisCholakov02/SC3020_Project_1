@@ -14,7 +14,7 @@ class Node
     LL** LLholder;
     Node* leftSib;
     Node* rightSib;
-    friend class BPTree;
+    friend class BPlusTree;
     int MAX;
     void delKeyInternal(Node* child, int x);
 

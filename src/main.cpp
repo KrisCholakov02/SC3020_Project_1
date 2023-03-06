@@ -16,7 +16,7 @@
 using namespace std;
 
 int MAX;//size of each node
-class BPTree;
+class BPlusTree;
 
 int main(int argc, char** argv) {
 
@@ -26,7 +26,7 @@ int main(int argc, char** argv) {
     cin >> BlockSize;
     cout << "Block Size " << BlockSize << " bytes\n" << endl;
 
-    BPTree bpt(MAX);
+    BPlusTree bpt(MAX);
     string command;
     string line;
     std::vector<std::string> fields;
