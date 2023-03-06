@@ -16,7 +16,6 @@ void Node::getContent() {
     }
 }
 
-
 bool Node::canLeafBorrow() {
     return size >= (maxSize + 1) / 2 + 1;
 }
@@ -25,54 +24,53 @@ bool Node::canInternalBorrow() {
     return size >= (maxSize + 1) / 2;
 }
 
-
-bool Node::addKey(int x, Block *block) {
-    if (x >= key[size - 1]) {
-        key[size] = x;
+bool Node::addKey(int newKey, Block *block) {
+    if (newKey >= key[size - 1]) {
+        key[size] = newKey;
         pointer[size] = block;
         linkedList[size] = NULL;
         size++;
-        cout << "Inserted " << x << " successfully\n";
+        cout << "Inserted " << newKey << " successfully\n";
     } else {
-        int i, m = 0;
+        int i, t = 0;
         for (i = 0; i < size; i++) {
-            if (x <= key[i]) {
+            if (newKey <= key[i]) {
                 break;
             }
-            m++;
+            t++;
         }
 
-        for (int j = size; j > m; j--) {
+        for (int j = size; j > t; j--) {
             key[j] = key[j - 1];
             pointer[j] = pointer[j - 1];
             linkedList[j] = linkedList[j - 1];
         }
-        key[m] = x;
-        pointer[m] = block;
-        linkedList[m] = NULL;
+        key[t] = newKey;
+        pointer[t] = block;
+        linkedList[t] = NULL;
         size++;
-        cout << "Inserted " << x << " successfully\n";
+        cout << "Inserted " << newKey << " successfully\n";
     }
 
     return true;
 }
 
-void Node::delKeyInternal(Node *child, int x) {
-    int pos;
+void Node::delKeyInternal(Node *child, int target) {
+    int position;
     for (int j = 0; j < size + 1; j++) {
         if (children[j] == child) {
-            pos = j;
+            position = j;
         }
     }
-    for (int i = pos; i < size + 1; i++) {
+    for (int i = position; i < size + 1; i++) {
         children[i] = children[i + 1];
     }
     for (int j = 0; j < size; j++) {
-        if (key[j] == x) {
-            pos = j;
+        if (key[j] == target) {
+            position = j;
         }
     }
-    for (int i = pos; i < size; i++) {
+    for (int i = position; i < size; i++) {
         key[i] = key[i + 1];
     }
     size--;

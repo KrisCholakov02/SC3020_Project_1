@@ -17,7 +17,7 @@ class Node
     Node* rightSib;
     friend class BPlusTree;
     int maxSize;
-    void delKeyInternal(Node* child, int x);
+    void delKeyInternal(Node* child, int target);
 
 public:
     Node(int MAX);
@@ -25,7 +25,7 @@ public:
     bool canInternalBorrow();
     bool canLeafMerge();
     bool canInternalMerge();
-    bool addKey(int k, Block* block);
+    bool addKey(int newKey, Block* block);
     void getContent();
 };
 
